@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="\\oai.local\oai\user\dengle\Desktop\OmniProjects\altSite\styles\css\bootstrap.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>
+    <script>
+        $(document).ready(function() {
+           $('form').submit(function(){
+            var api_key = '6feeef893a92d57711229dd04f29f4d2';
+            var city = $('input:text[name=city]').val();
+            $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + api_key, function(res){
+                var html_append = '';
+                html_append += "<p>" + res['name'] + ": " + res['weather'][0]['description'] + "</p>";
+                html_append += "<p>" + "Temperature Avg: " + res['main']['temp'] + " F</p>";
+                html_append += "<p>" + "High Temperature: " + res['main']['temp_max'] + " F</p>";
+                html_append += "<p>" + "Low Temperature: " + res['main']['temp_min'] + " F</p>";
+                html_append += "<p>" + "Humidity: " + res['main']['humidity'] + "%</p>";
+                $('#results').html(html_append);
+            });
+            return false;
+           })
+        });
+    </script>
+    <title>Weather API</title>
+</head>
+<body style="background-color: #000000">
+    <div class="container">
+        <div class="alert alert-dark" role="alert">
+            <img src="\\oai.local\oai\user\dengle\Desktop\OmniProjects\altSite\images\omni_jet.jfif" class="img-fluid" alt="Responsive image">
+        </div>
+        <nav class="nav">
+            <a class="nav-link active" href="https://www.oai.aero/">Home</a>
+            <a class="nav-link" href="backupPage.html">Back</a>
+            <!--a class="nav-link disabled" href="#">Disabled</a-->
+        </nav>
+        <hr>
+        <div class="jumbotron">
+            <h1 class="display-4">Omni Air Internation  brings you the ultimate weather data for you city!</h1>
+            <hr class="my-4">
+            <p>You just enter a city and in the box and press "Submit".</p>
+            <p class="lead">
+            <!--<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
+            </p>
+            <form>
+                <div class="form-group">
+                    <label for="City">City</label>
+                    <input type="text" name='city' class="form-control" id="City" placeholder="Type your city here">
+                </div>
+                <input type="submit" class="btn btn-primary" name="submit"/>
+            </form>
+            <br>
+            <div id="results"></div>
+        </div>
+    </div>
+</body>
+</html>
