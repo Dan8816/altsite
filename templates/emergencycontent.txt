@@ -1,1 +1,0 @@
-This is a dynamic emergency message from a text file called emergencycontent.text
